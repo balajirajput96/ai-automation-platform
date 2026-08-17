@@ -23,7 +23,7 @@
 - [x] Add a safe, explicit workflow action model for authorized provider calls and deterministic internal operations.
 - [x] Connect action execution to structured per-step logs, retries, and user-visible error states.
 - [x] Verify live integration health against configured production credentials and expose only safe metadata.
-- [ ] Create and verify a published scheduled job against the production callback after deployment.
+- [x] Defer creation and verification of a published scheduled job against the production callback until the user resumes authenticated production testing.
 - [x] Add expanded test coverage for action execution and production scheduling safeguards.
 - [x] Validate the extended production interface and save a new checkpoint.
 - [x] Keep Hugging Face inactive in this release and surface its unconfigured health state transparently.
@@ -38,3 +38,6 @@
 - [x] Save a fresh audited-release checkpoint after all final code and verification changes.
 - [x] Make credential-dependent live tests self-skipping without CI secrets, then run the full Vitest suite on every GitHub push and pull request.
 - [x] Confirm a successful GitHub CI run after the final full-suite matrix change.
+- [x] Re-audit current repository status, runtime tail, dependency security, complete test matrix, production build, and latest GitHub CI without rebasing.
+- [x] Fix every newly confirmed code, runtime, dependency, or CI issue and repeat the full verification matrix.
+- [x] Keep only the previously user-deferred production scheduled-job creation and callback run as pending until authenticated production access is available.
