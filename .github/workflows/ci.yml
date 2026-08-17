@@ -5,6 +5,13 @@ on:
     branches: ["**"]
   pull_request:
     branches: ["**"]
+  workflow_dispatch:
+    inputs:
+      live_provider_validation:
+        description: "Run credentialed GitHub and Gemini health checks when repository secrets are configured"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -36,7 +43,36 @@ jobs:
         run: pnpm check
 
       - name: Run unit tests
-        run: pnpm vitest run --exclude 'server/**/*.live.test.ts'
+        run: pnpm vitest run
 
       - name: Build production bundle
         run: pnpm build
+
+  live-provider-contracts:
+    name: Live provider contracts
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.live_provider_validation && secrets.GITHUB_TOKEN != '' && secrets.GEMINI_API_KEY != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate configured providers
+        run: pnpm vitest run server/integrationHealth.live.test.ts

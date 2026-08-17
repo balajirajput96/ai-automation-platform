@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { executeWorkflowStep } from "./workflowExecution";
 
+const hasProjectAiCredentials = Boolean(process.env.BUILT_IN_FORGE_API_KEY && process.env.BUILT_IN_FORGE_API_URL);
+
 describe("built-in AI workflow action", () => {
-  it("returns a usable result from the configured project AI service", async () => {
+  it.skipIf(!hasProjectAiCredentials)("returns a usable result from the configured project AI service", async () => {
     const result = await executeWorkflowStep({
       id: 1,
       workflowId: "live-contract",
