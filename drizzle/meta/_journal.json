@@ -1,5 +1,27 @@
 {
   "version": "7",
   "dialect": "mysql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1786984309664,
+      "tag": "0000_careless_nico_minoru",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1786984633951,
+      "tag": "0001_legal_odin",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1786985291599,
+      "tag": "0002_soft_synch",
+      "breakpoints": true
+    }
+  ]
 }

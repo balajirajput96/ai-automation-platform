@@ -1,0 +1,21 @@
+# Project TODO
+
+- [x] Define data models for agents, workflows, projects, integrations, execution logs, scheduled jobs, and API connection metadata.
+- [x] Create and apply database migration for core AI operations entities and ownership indexes.
+- [x] Implement authenticated tRPC procedures for creation, listing, updates, status toggles, pagination, and platform overview metrics.
+- [x] Implement production-safe scheduled-job creation and enable/disable controls using the managed heartbeat integration.
+- [x] Build the unified application shell, responsive navigation, and cohesive dark visual system.
+- [x] Build the Dashboard Home with agent, workflow, integration, and operational status summaries.
+- [x] Build AI Agents Management with create, configuration, status toggle, and monitor views.
+- [x] Build Workflow Builder with trigger labels, ordered steps, and run history.
+- [x] Build Projects Management with linked agents and workflows.
+- [x] Build Integrations Health Dashboard using the exact required integration names and authentication/permission states.
+- [x] Build paginated Execution Log Viewer using the required status labels: success, error, and running.
+- [x] Build Scheduled Jobs Manager with cron, last/next run, creation, and toggle behavior.
+- [x] Build Settings page for user profile display and external API-key connection metadata without exposing secrets.
+- [x] Add authenticated update flows for agent configuration, workflow details and steps, and project title, description, and status.
+- [x] Add per-agent monitoring with linked execution history and an existing-agent configuration flow.
+- [x] Replace manually editable integration health metadata with authorized connector-derived health checks where an API or connector is available, while retaining transparent unavailable states where it is not.
+- [x] Gate scheduled-job creation until publication and execute linked workflow steps with structured success/error runs in the scheduled callback.
+- [x] Add and run Vitest coverage for router behavior and status validation.
+- [x] Verify desktop and mobile visual layouts, then save the completed project checkpoint.

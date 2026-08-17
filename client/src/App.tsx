@@ -3,14 +3,35 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import DashboardLayout from "./components/DashboardLayout";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
+import {
+  AgentsScreen,
+  IntegrationsScreen,
+  OverviewScreen,
+  ProjectsScreen,
+  RunsScreen,
+  SchedulesScreen,
+  SettingsScreen,
+  WorkflowsScreen,
+} from "./pages/OperationsPlatform";
+
+function PlatformPage({ children }: { children: React.ReactNode }) {
+  return <DashboardLayout>{children}</DashboardLayout>;
+}
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
+      <Route path={"/"}><PlatformPage><OverviewScreen /></PlatformPage></Route>
+      <Route path={"/agents"}><PlatformPage><AgentsScreen /></PlatformPage></Route>
+      <Route path={"/workflows"}><PlatformPage><WorkflowsScreen /></PlatformPage></Route>
+      <Route path={"/projects"}><PlatformPage><ProjectsScreen /></PlatformPage></Route>
+      <Route path={"/integrations"}><PlatformPage><IntegrationsScreen /></PlatformPage></Route>
+      <Route path={"/runs"}><PlatformPage><RunsScreen /></PlatformPage></Route>
+      <Route path={"/schedules"}><PlatformPage><SchedulesScreen /></PlatformPage></Route>
+      <Route path={"/settings"}><PlatformPage><SettingsScreen /></PlatformPage></Route>
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
@@ -27,7 +48,7 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider
-        defaultTheme="light"
+        defaultTheme="dark"
         // switchable
       >
         <TooltipProvider>

@@ -43,135 +43,92 @@
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
+  --radius: 0.8rem;
+  --primary: oklch(0.54 0.2 295);
+  --primary-foreground: oklch(0.98 0.01 295);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --background: oklch(0.99 0.004 275);
+  --foreground: oklch(0.23 0.02 276);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
+  --card-foreground: var(--foreground);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  --popover-foreground: var(--foreground);
+  --secondary: oklch(0.96 0.012 276);
+  --secondary-foreground: oklch(0.34 0.02 276);
+  --muted: oklch(0.95 0.01 276);
+  --muted-foreground: oklch(0.51 0.02 276);
+  --accent: oklch(0.94 0.02 276);
+  --accent-foreground: var(--foreground);
+  --destructive: oklch(0.62 0.2 24);
+  --destructive-foreground: oklch(0.98 0.01 24);
+  --border: oklch(0.89 0.016 276);
+  --input: oklch(0.89 0.016 276);
+  --ring: oklch(0.54 0.2 295);
+  --chart-1: oklch(0.54 0.2 295);
+  --chart-2: oklch(0.62 0.15 215);
+  --chart-3: oklch(0.62 0.14 150);
+  --chart-4: oklch(0.69 0.15 75);
+  --chart-5: oklch(0.6 0.16 345);
+  --sidebar: oklch(0.97 0.008 276);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-accent: oklch(0.92 0.02 276);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
 }
 
 .dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
-  --destructive: oklch(0.704 0.191 22.216);
+  --primary: oklch(0.74 0.18 295);
+  --primary-foreground: oklch(0.98 0.01 295);
+  --sidebar-primary: oklch(0.74 0.18 295);
+  --sidebar-primary-foreground: oklch(0.98 0.01 295);
+  --background: oklch(0.145 0.024 276);
+  --foreground: oklch(0.94 0.012 275);
+  --card: oklch(0.19 0.027 276);
+  --card-foreground: oklch(0.94 0.012 275);
+  --popover: oklch(0.20 0.029 276);
+  --popover-foreground: oklch(0.94 0.012 275);
+  --secondary: oklch(0.23 0.03 276);
+  --secondary-foreground: oklch(0.77 0.014 275);
+  --muted: oklch(0.24 0.025 276);
+  --muted-foreground: oklch(0.68 0.02 275);
+  --accent: oklch(0.27 0.034 276);
+  --accent-foreground: oklch(0.96 0.01 275);
+  --destructive: oklch(0.69 0.19 24);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  --border: oklch(0.43 0.025 276 / 48%);
+  --input: oklch(0.35 0.03 276 / 65%);
+  --ring: oklch(0.74 0.18 295);
+  --chart-1: oklch(0.74 0.18 295);
+  --chart-2: oklch(0.74 0.14 215);
+  --chart-3: oklch(0.76 0.15 150);
+  --chart-4: oklch(0.78 0.15 75);
+  --chart-5: oklch(0.7 0.16 345);
+  --sidebar: oklch(0.17 0.027 276);
+  --sidebar-foreground: oklch(0.91 0.012 275);
+  --sidebar-accent: oklch(0.25 0.034 276);
+  --sidebar-accent-foreground: oklch(0.98 0.01 275);
+  --sidebar-border: oklch(0.43 0.025 276 / 48%);
+  --sidebar-ring: oklch(0.74 0.18 295);
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  button:not(:disabled),
-  [role="button"]:not([aria-disabled="true"]),
-  [type="button"]:not(:disabled),
-  [type="submit"]:not(:disabled),
-  [type="reset"]:not(:disabled),
-  a[href],
-  select:not(:disabled),
-  input[type="checkbox"]:not(:disabled),
-  input[type="radio"]:not(:disabled) {
-    @apply cursor-pointer;
-  }
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground; font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif; min-width: 320px; }
+  button:not(:disabled), [role="button"]:not([aria-disabled="true"]), [type="button"]:not(:disabled), [type="submit"]:not(:disabled), [type="reset"]:not(:disabled), a[href], select:not(:disabled), input[type="checkbox"]:not(:disabled), input[type="radio"]:not(:disabled) { @apply cursor-pointer; }
 }
 
 @layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
-  .container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
-    padding-right: 1rem;
+  .container { width: 100%; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+  .flex { min-height: 0; min-width: 0; }
+  .font-display { font-family: "DM Mono", ui-monospace, monospace; }
+  .aurora-grid {
+    background-image: radial-gradient(circle at 85% -5%, oklch(0.56 0.16 295 / 15%), transparent 28rem), radial-gradient(circle at 4% 100%, oklch(0.6 0.13 210 / 10%), transparent 24rem), linear-gradient(oklch(1 0 0 / 2%) 1px, transparent 1px), linear-gradient(90deg, oklch(1 0 0 / 2%) 1px, transparent 1px);
+    background-size: auto, auto, 42px 42px, 42px 42px;
   }
-
-  .flex {
-    min-height: 0;
-    min-width: 0;
-  }
-
-  @media (min-width: 640px) {
-    .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
-      padding-right: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .container {
-      padding-left: 2rem; /* 32px - desktop padding */
-      padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
-    }
-  }
+  .glass-panel { @apply rounded-2xl border border-border/80 bg-card/75 shadow-[0_16px_42px_rgba(0,0,0,.14)] backdrop-blur-sm; }
+  .field-control { @apply w-full rounded-md border border-input bg-background/70 px-3 py-2 text-sm outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-ring/30; }
+  @media (min-width: 640px) { .container { padding-left: 1.5rem; padding-right: 1.5rem; } }
+  @media (min-width: 1024px) { .container { padding-left: 2rem; padding-right: 2rem; max-width: 1280px; } }
 }
