@@ -4,8 +4,9 @@ import { nanoid } from "nanoid";
 import { z } from "zod";
 import { getWorkflowSteps, requireOperationsDb } from "../db";
 import { protectedProcedure, router } from "../_core/trpc";
+import { executeWorkflowRun } from "../workflowExecution";
 
-const stepInput = z.object({ label: z.string().trim().min(2).max(140), action: z.string().trim().min(2).max(80), configuration: z.string().trim().max(3000).default("{}") });
+const stepInput = z.object({ label: z.string().trim().min(2).max(140), action: z.enum(["operation", "llm"]), configuration: z.string().trim().max(8000).default("{}") });
 
 export const workflowsRouter = router({
   list: protectedProcedure.query(async ({ ctx }) => {
@@ -43,6 +44,9 @@ export const workflowsRouter = router({
       await db.update(workflows).set({ enabled: input.enabled, updatedAt: new Date() }).where(eq(workflows.id, input.id));
       return { ...workflow, enabled: input.enabled };
     }),
+  runNow: protectedProcedure
+    .input(z.object({ workflowId: z.string().min(1) }))
+    .mutation(({ ctx, input }) => executeWorkflowRun({ ownerId: ctx.user.id, workflowId: input.workflowId, runLabel: "Manual workflow run" })),
   runHistory: protectedProcedure
     .input(z.object({ workflowId: z.string().min(1) }))
     .query(async ({ ctx, input }) => {

@@ -84,10 +84,11 @@ export async function inspectIntegration(name: IntegrationName): Promise<Integra
       const apiKey = process.env.GEMINI_API_KEY;
       return apiKey ? await checkGemini(apiKey) : notConfigured();
     }
-    const token = process.env.HUGGINGFACE_TOKEN;
-    return token ? await checkHuggingFace(token) : notConfigured();
+    // Hugging Face is intentionally inactive for this release. Do not probe or
+    // attempt to use a stored credential unless the user explicitly re-enables it.
+    return notConfigured();
   } catch {
-    const configured = name === "GitHub" ? Boolean(process.env.GITHUB_TOKEN) : name === "Google" ? Boolean(process.env.GOOGLE_ACCESS_TOKEN) : name === "Gemini" ? Boolean(process.env.GEMINI_API_KEY) : Boolean(process.env.HUGGINGFACE_TOKEN);
+    const configured = name === "GitHub" ? Boolean(process.env.GITHUB_TOKEN) : name === "Google" ? Boolean(process.env.GOOGLE_ACCESS_TOKEN) : name === "Gemini" ? Boolean(process.env.GEMINI_API_KEY) : false;
     return unavailable(configured);
   }
 }

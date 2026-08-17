@@ -19,3 +19,17 @@
 - [x] Gate scheduled-job creation until publication and execute linked workflow steps with structured success/error runs in the scheduled callback.
 - [x] Add and run Vitest coverage for router behavior and status validation.
 - [x] Verify desktop and mobile visual layouts, then save the completed project checkpoint.
+- [ ] Inspect authorized provider and connector availability for live integrations without exposing credentials.
+- [ ] Add a safe, explicit workflow action model for authorized provider calls and deterministic internal operations.
+- [ ] Connect action execution to structured per-step logs, retries, and user-visible error states.
+- [ ] Verify live integration health against configured production credentials and expose only safe metadata.
+- [ ] Create and verify a published scheduled job against the production callback after deployment.
+- [ ] Add expanded test coverage for action execution and production scheduling safeguards.
+- [ ] Validate the extended production interface and save a new checkpoint.
+- [ ] Keep Hugging Face inactive in this release and surface its unconfigured health state transparently.
+- [ ] Use the verified Gemini credential and AstraFlow built-in AI action as the supported live AI execution path.
+- [ ] Audit repository status, production runtime logs, workflow executor paths, and all pending TODO items for unresolved failures.
+- [ ] Resolve every confirmed runtime or type issue and remove stale implementation references.
+- [ ] Add a GitHub Actions workflow that runs type checking, all Vitest tests, and production build on pushes and pull requests.
+- [ ] Run the full local quality gate repeatedly until type checks, all tests, and production build pass.
+- [ ] Verify the extended UI in desktop and mobile layouts, then checkpoint the audited release.

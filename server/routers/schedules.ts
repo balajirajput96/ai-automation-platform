@@ -16,16 +16,14 @@ export const schedulesRouter = router({
     return db.select().from(scheduledJobs).where(eq(scheduledJobs.ownerId, ctx.user.id)).orderBy(desc(scheduledJobs.createdAt));
   }),
   create: protectedProcedure
-    .input(z.object({ name: z.string().trim().min(2).max(120), workflowId: z.string().min(1).optional(), cronExpression: cronInput }))
+    .input(z.object({ name: z.string().trim().min(2).max(120), workflowId: z.string().min(1), cronExpression: cronInput }))
     .mutation(async ({ ctx, input }) => {
       if (process.env.NODE_ENV !== "production") {
         throw new Error("Publish the platform before creating recurring jobs so callbacks have a stable production endpoint.");
       }
       const db = await requireOperationsDb();
-      if (input.workflowId) {
-        const [workflow] = await db.select().from(workflows).where(and(eq(workflows.id, input.workflowId), eq(workflows.ownerId, ctx.user.id))).limit(1);
-        if (!workflow) throw new Error("Workflow not found");
-      }
+      const [workflow] = await db.select().from(workflows).where(and(eq(workflows.id, input.workflowId), eq(workflows.ownerId, ctx.user.id))).limit(1);
+      if (!workflow) throw new Error("Workflow not found");
       const id = nanoid();
       await db.insert(scheduledJobs).values({ id, ownerId: ctx.user.id, ...input });
       const sessionToken = parseCookie(ctx.req.headers.cookie ?? "")[COOKIE_NAME] ?? "";
