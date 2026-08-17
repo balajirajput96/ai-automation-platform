@@ -25,16 +25,16 @@
 - [x] Verify live integration health against configured production credentials and expose only safe metadata.
 - [ ] Create and verify a published scheduled job against the production callback after deployment.
 - [x] Add expanded test coverage for action execution and production scheduling safeguards.
-- [ ] Validate the extended production interface and save a new checkpoint.
+- [x] Validate the extended production interface and save a new checkpoint.
 - [x] Keep Hugging Face inactive in this release and surface its unconfigured health state transparently.
 - [x] Use the verified Gemini credential and AstraFlow built-in AI action as the supported live AI execution path.
 - [x] Audit repository status, production runtime logs, workflow executor paths, and all pending TODO items for unresolved failures.
 - [x] Resolve every confirmed runtime or type issue and remove stale implementation references.
 - [x] Add a GitHub Actions workflow that runs type checking, all Vitest tests, and production build on pushes and pull requests.
 - [x] Run the full local quality gate repeatedly until type checks, all tests, and production build pass.
-- [ ] Verify the extended UI in desktop and mobile layouts, then checkpoint the audited release.
+- [x] Verify the extended UI in desktop and mobile layouts, then checkpoint the audited release.
 - [x] Reconcile GitHub integration health with a fresh live API verification or an explicit unavailable state.
 - [x] Run the complete Vitest suite in GitHub CI while safely skipping credential-dependent live checks when no CI secrets are configured.
-- [ ] Save a fresh audited-release checkpoint after all final code and verification changes.
-- [ ] Make credential-dependent live tests self-skipping without CI secrets, then run the full Vitest suite on every GitHub push and pull request.
-- [ ] Confirm a successful GitHub CI run after the final full-suite matrix change.
+- [x] Save a fresh audited-release checkpoint after all final code and verification changes.
+- [x] Make credential-dependent live tests self-skipping without CI secrets, then run the full Vitest suite on every GitHub push and pull request.
+- [x] Confirm a successful GitHub CI run after the final full-suite matrix change.
