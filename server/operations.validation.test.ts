@@ -43,6 +43,11 @@ describe("AI operations input contracts", () => {
 
   it("requires six cron fields for scheduled jobs", async () => {
     const caller = appRouter.createCaller(createAuthenticatedContext());
-    await expect(caller.schedules.create({ name: "Invalid schedule", cronExpression: "0 9 * * *" })).rejects.toMatchObject({ code: "BAD_REQUEST" });
+    await expect(caller.schedules.create({ name: "Invalid schedule", workflowId: "workflow-1", cronExpression: "0 9 * * *" })).rejects.toMatchObject({ code: "BAD_REQUEST" });
+  });
+
+  it("requires a published runtime before creating recurring jobs", async () => {
+    const caller = appRouter.createCaller(createAuthenticatedContext());
+    await expect(caller.schedules.create({ name: "Protected schedule", workflowId: "workflow-1", cronExpression: "0 0 9 * * *" })).rejects.toThrow("Publish the platform before creating recurring jobs");
   });
 });
