@@ -9,6 +9,7 @@ export type WorkflowAction = "operation" | "llm";
 export type StepConfiguration = {
   delayMs?: number;
   fail?: boolean;
+  maxAttempts?: number;
   message?: string;
   model?: "gpt-5-mini" | "claude-haiku-4-5" | "gemini-3-flash-preview";
   prompt?: string;
@@ -19,12 +20,26 @@ export function parseStepConfiguration(raw: string): StepConfiguration {
     const parsed = JSON.parse(raw) as StepConfiguration;
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("must be an object");
     if (parsed.delayMs !== undefined && (!Number.isInteger(parsed.delayMs) || parsed.delayMs < 0 || parsed.delayMs > 5_000)) throw new Error("delayMs must be an integer between 0 and 5000");
+    if (parsed.maxAttempts !== undefined && (!Number.isInteger(parsed.maxAttempts) || parsed.maxAttempts < 1 || parsed.maxAttempts > 3)) throw new Error("maxAttempts must be an integer between 1 and 3");
     if (parsed.model !== undefined && !["gpt-5-mini", "claude-haiku-4-5", "gemini-3-flash-preview"].includes(parsed.model)) throw new Error("Unsupported model");
     if (parsed.prompt !== undefined && (typeof parsed.prompt !== "string" || parsed.prompt.length > 8_000)) throw new Error("prompt must be a string up to 8000 characters");
     return parsed;
   } catch (error) {
     throw new Error(error instanceof Error && error.message !== "Unexpected token '}'" ? `Invalid workflow step configuration: ${error.message}` : "Workflow step configuration must be valid JSON");
   }
+}
+
+export async function executeWithRetries<T>(operation: () => Promise<T>, maxAttempts: number): Promise<{ value: T; attempts: number }> {
+  let lastError: unknown;
+  for (let attempts = 1; attempts <= maxAttempts; attempts += 1) {
+    try {
+      return { value: await operation(), attempts };
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  const message = lastError instanceof Error ? lastError.message : String(lastError);
+  throw new Error(`${message} after ${maxAttempts} attempt${maxAttempts === 1 ? "" : "s"}`);
 }
 
 export async function executeWorkflowStep(step: typeof workflowSteps.$inferSelect): Promise<string> {
@@ -77,10 +92,11 @@ export async function executeWorkflowRun(input: { ownerId: number; workflowId: s
       const stepStartedAt = new Date();
       activeStep = { id: stepRunId, startedAt: stepStartedAt };
       await db.insert(workflowStepRuns).values({ id: stepRunId, workflowRunId: runId, workflowStepId: step.id, status: "running", startedAt: stepStartedAt });
-      const result = await executeWorkflowStep(step);
+      const maxAttempts = parseStepConfiguration(step.configuration).maxAttempts ?? 1;
+      const { value: result, attempts } = await executeWithRetries(() => executeWorkflowStep(step), maxAttempts);
       const completedAt = new Date();
       await db.update(workflowStepRuns).set({ status: "success", completedAt, durationMs: completedAt.getTime() - stepStartedAt.getTime(), output: result }).where(eq(workflowStepRuns.id, stepRunId));
-      output.push(`Step ${step.position + 1} · ${step.label}\n${result}`);
+      output.push(`Step ${step.position + 1} · ${step.label}${attempts > 1 ? ` (succeeded on attempt ${attempts})` : ""}\n${result}`);
       activeStep = null;
     }
     const completedAt = new Date();

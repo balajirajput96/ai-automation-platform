@@ -36,7 +36,7 @@ jobs:
         run: pnpm check
 
       - name: Run unit tests
-        run: pnpm vitest run server/auth.logout.test.ts server/operations.validation.test.ts server/workflowExecution.test.ts
+        run: pnpm vitest run --exclude 'server/**/*.live.test.ts'
 
       - name: Build production bundle
         run: pnpm build
