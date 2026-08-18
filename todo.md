@@ -81,3 +81,11 @@
 - [x] Fix any newly confirmed code, runtime, dependency, or CI issue and add focused regression coverage.
 - [ ] Repeat type check, full Vitest suite, production build, production dependency audit, and both relevant GitHub Actions runs on the final rebased commit.
 - [ ] Save the final rebased-and-verified AstraFlow release checkpoint.
+- [ ] Recover access to the user-authorized GitHub session only through an already signed-in relevant browser profile, then complete queued CI monitoring and reruns.
+- [x] Re-audit all currently unresolved GitHub workflow states and repository merge/rebase readiness after the latest commit.
+- [x] Confirm that the existing Scheduled Jobs feature uses only deployed, authenticated, idempotent callback handling and does not create unrequested recurring external actions.
+- [x] Add explicit duplicate-trigger protection to scheduled workflow execution so platform retries cannot create duplicate runs, with focused regression coverage.
+- [ ] Restore GitHub Actions access and confirm final queued push and manual workflow outcomes on the latest rebased commit.
+- [x] Backfill or lazily initialize callback tokens for scheduled jobs created before the retry-safety migration, with legacy-row regression coverage.
+- [x] Verify the authorized path for rotating user-owned Heartbeat callback payloads after a scheduled execution, then add focused coverage.
+- [ ] Run the user-deferred authenticated production scheduled-job callback verification before enabling any real recurring workflow.

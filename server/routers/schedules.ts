@@ -25,10 +25,11 @@ export const schedulesRouter = router({
       const [workflow] = await db.select().from(workflows).where(and(eq(workflows.id, input.workflowId), eq(workflows.ownerId, ctx.user.id))).limit(1);
       if (!workflow) throw new Error("Workflow not found");
       const id = nanoid();
-      await db.insert(scheduledJobs).values({ id, ownerId: ctx.user.id, ...input });
+      const callbackToken = nanoid();
+      await db.insert(scheduledJobs).values({ id, ownerId: ctx.user.id, callbackToken, ...input });
       const sessionToken = parseCookie(ctx.req.headers.cookie ?? "")[COOKIE_NAME] ?? "";
       try {
-        const job = await createHeartbeatJob({ name: `astra-${ctx.user.id}-${id}`, cron: input.cronExpression, path: "/api/scheduled/workflow", payload: { jobId: id }, description: `AstraFlow recurring job: ${input.name}` }, sessionToken);
+        const job = await createHeartbeatJob({ name: `astra-${ctx.user.id}-${id}`, cron: input.cronExpression, path: "/api/scheduled/workflow", payload: { jobId: id, callbackToken }, description: `AstraFlow recurring job: ${input.name}` }, sessionToken);
         await db.update(scheduledJobs).set({ scheduleCronTaskUid: job.taskUid, nextRunAt: job.nextExecutionAt ? new Date(job.nextExecutionAt) : null }).where(eq(scheduledJobs.id, id));
         return { id, nextRunAt: job.nextExecutionAt ?? null };
       } catch (error) {

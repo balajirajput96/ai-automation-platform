@@ -1,4 +1,4 @@
-import { and, desc, eq, inArray, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, isNull, or, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import {
   aiAgents,
@@ -235,4 +235,63 @@ export async function getScheduledJobByTaskUid(taskUid: string) {
   const db = await requireOperationsDb();
   const [job] = await db.select().from(scheduledJobs).where(eq(scheduledJobs.scheduleCronTaskUid, taskUid)).limit(1);
   return job;
+}
+
+function affectedRows(result: unknown): number {
+  const header = Array.isArray(result) ? result[0] : result;
+  return Number((header as { affectedRows?: number } | undefined)?.affectedRows ?? 0);
+}
+
+export async function claimScheduledCallback(jobId: string, callbackToken: string, allowUninitialized = false) {
+  const db = await requireOperationsDb();
+  const callbackTokenCondition = allowUninitialized
+    ? or(eq(scheduledJobs.callbackToken, callbackToken), isNull(scheduledJobs.callbackToken))
+    : eq(scheduledJobs.callbackToken, callbackToken);
+  const result = await db
+    .update(scheduledJobs)
+    .set({ callbackToken, activeCallbackToken: callbackToken, updatedAt: new Date() })
+    .where(and(
+      eq(scheduledJobs.id, jobId),
+      callbackTokenCondition,
+      isNull(scheduledJobs.activeCallbackToken),
+      isNull(scheduledJobs.completedCallbackToken)
+    ));
+  return affectedRows(result) === 1;
+}
+
+export async function releaseScheduledCallbackClaim(jobId: string, callbackToken: string) {
+  const db = await requireOperationsDb();
+  await db
+    .update(scheduledJobs)
+    .set({ activeCallbackToken: null, updatedAt: new Date() })
+    .where(and(eq(scheduledJobs.id, jobId), eq(scheduledJobs.activeCallbackToken, callbackToken)));
+}
+
+export async function completeScheduledCallback(jobId: string, callbackToken: string) {
+  const db = await requireOperationsDb();
+  const completedAt = new Date();
+  const result = await db
+    .update(scheduledJobs)
+    .set({ activeCallbackToken: null, completedCallbackToken: callbackToken, lastRunAt: completedAt, updatedAt: completedAt })
+    .where(and(eq(scheduledJobs.id, jobId), eq(scheduledJobs.activeCallbackToken, callbackToken)));
+  return affectedRows(result) === 1;
+}
+
+export async function rotateScheduledCallbackToken(jobId: string, callbackToken: string, nextCallbackToken: string, nextRunAt?: string | null) {
+  const db = await requireOperationsDb();
+  const result = await db
+    .update(scheduledJobs)
+    .set({
+      callbackToken: nextCallbackToken,
+      completedCallbackToken: null,
+      nextRunAt: nextRunAt ? new Date(nextRunAt) : null,
+      updatedAt: new Date(),
+    })
+    .where(and(
+      eq(scheduledJobs.id, jobId),
+      eq(scheduledJobs.callbackToken, callbackToken),
+      eq(scheduledJobs.completedCallbackToken, callbackToken),
+      isNull(scheduledJobs.activeCallbackToken)
+    ));
+  return affectedRows(result) === 1;
 }
