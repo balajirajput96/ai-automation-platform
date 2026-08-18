@@ -76,3 +76,8 @@
 - [x] Save the exhaustive audited release checkpoint.
 - [x] Fix the execution-log navigation route that currently renders a 404 and add a route-level regression check.
 - [x] Include client route regression tests in the standard Vitest discovery pattern.
+- [x] Re-audit the latest remote and local history, current GitHub Actions runs, and fresh runtime logs after the final route-verification release.
+- [x] Safely rebase current AstraFlow work onto the latest GitHub main history, resolving only confirmed conflicts without dropping verified fixes.
+- [x] Fix any newly confirmed code, runtime, dependency, or CI issue and add focused regression coverage.
+- [ ] Repeat type check, full Vitest suite, production build, production dependency audit, and both relevant GitHub Actions runs on the final rebased commit.
+- [ ] Save the final rebased-and-verified AstraFlow release checkpoint.
