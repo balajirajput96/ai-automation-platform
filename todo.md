@@ -69,3 +69,23 @@
 - [x] Apply the user-authorized git rebase, resolve conflicts safely, and verify GitHub CI success.
 - [x] Produce downloadable source-code and terminal-verification artifacts without secrets.
 - [x] Save the rebased and verified release checkpoint.
+- [x] Audit all server/router paths, browser-visible UI routes, dependencies, runtime logs and GitHub workflow definitions.
+- [x] Fix every confirmed code or configuration defect and add focused regression coverage.
+- [x] Verify only the external integrations required by AstraFlow without enabling unrelated connectors.
+- [x] Run complete local quality gates and both GitHub workflows to a successful conclusion.
+- [x] Save the exhaustive audited release checkpoint.
+- [x] Fix the execution-log navigation route that currently renders a 404 and add a route-level regression check.
+- [x] Include client route regression tests in the standard Vitest discovery pattern.
+- [x] Re-audit the latest remote and local history, current GitHub Actions runs, and fresh runtime logs after the final route-verification release.
+- [x] Safely rebase current AstraFlow work onto the latest GitHub main history, resolving only confirmed conflicts without dropping verified fixes.
+- [x] Fix any newly confirmed code, runtime, dependency, or CI issue and add focused regression coverage.
+- [x] Repeat type check, full Vitest suite, production build, production dependency audit, and both relevant GitHub Actions runs on the final rebased commit.
+- [x] Save the final rebased-and-verified AstraFlow release checkpoint.
+- [x] Recover operational GitHub Actions access through the configured repository integration, then complete queued CI monitoring and reruns.
+- [x] Re-audit all currently unresolved GitHub workflow states and repository merge/rebase readiness after the latest commit.
+- [x] Confirm that the existing Scheduled Jobs feature uses only deployed, authenticated, idempotent callback handling and does not create unrequested recurring external actions.
+- [x] Add explicit duplicate-trigger protection to scheduled workflow execution so platform retries cannot create duplicate runs, with focused regression coverage.
+- [x] Restore GitHub Actions access and confirm final queued push and manual workflow outcomes on the latest rebased commit.
+- [x] Backfill or lazily initialize callback tokens for scheduled jobs created before the retry-safety migration, with legacy-row regression coverage.
+- [x] Verify the authorized path for rotating user-owned Heartbeat callback payloads after a scheduled execution, then add focused coverage.
+- [ ] Run the user-deferred authenticated production scheduled-job callback verification before enabling any real recurring workflow.
