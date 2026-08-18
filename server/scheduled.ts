@@ -5,6 +5,10 @@ import { sdk } from "./_core/sdk";
 import { getScheduledJobByTaskUid, requireOperationsDb } from "./db";
 import { executeWorkflowRun } from "./workflowExecution";
 
+export function scheduledFailureResponse() {
+  return { error: "scheduled-workflow-failed", timestamp: new Date().toISOString() };
+}
+
 export async function runScheduledWorkflow(req: Request, res: Response) {
   try {
     const user = await sdk.authenticateRequest(req);
@@ -19,7 +23,7 @@ export async function runScheduledWorkflow(req: Request, res: Response) {
     await db.update(scheduledJobs).set({ lastRunAt: new Date(), updatedAt: new Date() }).where(eq(scheduledJobs.id, job.id));
     return res.json({ ok: true, runId: result.runId });
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    return res.status(500).json({ error: message, context: { url: req.originalUrl }, timestamp: new Date().toISOString() });
+    console.error("[Scheduled workflow] Execution failed", error);
+    return res.status(500).json(scheduledFailureResponse());
   }
 }

@@ -41,3 +41,9 @@
 - [x] Re-audit current repository status, runtime tail, dependency security, complete test matrix, production build, and latest GitHub CI without rebasing.
 - [x] Fix every newly confirmed code, runtime, dependency, or CI issue and repeat the full verification matrix.
 - [x] Keep only the previously user-deferred production scheduled-job creation and callback run as pending until authenticated production access is available.
+- [ ] Audit every server/router workflow path, application route, CI job, runtime log category, and dependency resolution without rebasing.
+- [ ] Add tests or fixes for any executable path found without deterministic coverage or safe failure handling.
+- [ ] Run isolated tests, full tests, type checking, production build, security audit, and a fresh GitHub CI run after all changes.
+- [ ] Save an audited checkpoint after the final deep-audit verification.
+- [ ] Sanitize scheduled callback failure responses and add deterministic cron authorization and failure-path coverage.
+- [ ] Split the oversized production client bundle into cacheable vendor chunks and verify build output remains below the warning threshold.
