@@ -18,8 +18,10 @@ export const projectsRouter = router({
   create: protectedProcedure.input(projectInput).mutation(async ({ ctx, input }) => {
     const db = await requireOperationsDb();
     const id = nanoid();
-    await db.insert(projects).values({ id, ownerId: ctx.user.id, title: input.title, description: input.description, status: input.status });
-    await replaceProjectLinks(ctx.user.id, id, input.agentIds, input.workflowIds);
+    await db.transaction(async transaction => {
+      await transaction.insert(projects).values({ id, ownerId: ctx.user.id, title: input.title, description: input.description, status: input.status });
+      await replaceProjectLinks(ctx.user.id, id, input.agentIds, input.workflowIds, transaction);
+    });
     return { id };
   }),
   update: protectedProcedure.input(projectInput.extend({ id: z.string().min(1) })).mutation(async ({ ctx, input }) => {

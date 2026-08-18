@@ -185,13 +185,16 @@ export async function getPagedRuns(ownerId: number, page: number, pageSize: numb
   return { items, total: Number(total) };
 }
 
+type ProjectLinkClient = Pick<Awaited<ReturnType<typeof requireOperationsDb>>, "select" | "insert" | "delete">;
+
 export async function replaceProjectLinks(
   ownerId: number,
   projectId: string,
   agentIds: string[],
-  workflowIds: string[]
+  workflowIds: string[],
+  client?: ProjectLinkClient
 ) {
-  const db = await requireOperationsDb();
+  const db = client ?? (await requireOperationsDb());
   if (agentIds.length) {
     const validAgents = await db
       .select({ id: aiAgents.id })

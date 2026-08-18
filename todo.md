@@ -56,3 +56,9 @@
 - [x] Fix any newly confirmed failure or missing safety guard and add focused test coverage.
 - [x] Run full local verification and both GitHub Actions jobs again after all fixes.
 - [x] Save the repeated non-rebase audit release checkpoint.
+- [ ] Audit every router, workflow executor, scheduled callback, UI route and GitHub Actions job without rebasing.
+- [ ] Fix every newly verified defect or missing error guard and add deterministic test coverage.
+- [ ] Re-run local quality checks and both GitHub Actions jobs until they complete successfully.
+- [ ] Save the exhaustive non-rebase verification checkpoint.
+- [ ] Make project creation and linked-agent/workflow validation atomic so invalid link input cannot leave an orphan project.
+- [ ] Add a focused router test proving project creation uses one transaction for project and link writes.
