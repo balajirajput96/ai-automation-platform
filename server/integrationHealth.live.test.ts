@@ -3,16 +3,17 @@ import { inspectIntegration } from "./integrationHealth";
 
 const hasGitHubCredential = Boolean(process.env.GITHUB_TOKEN);
 const hasGeminiCredential = Boolean(process.env.GEMINI_API_KEY);
+const runLiveProviderChecks = process.env.RUN_LIVE_PROVIDER_TESTS === "true";
 
 describe("configured provider credentials", () => {
-  it.skipIf(!hasGitHubCredential)("validates GitHub through its lightweight authenticated health endpoint", async () => {
+  it.skipIf(!runLiveProviderChecks || !hasGitHubCredential)("validates GitHub through its lightweight authenticated health endpoint", async () => {
     const health = await inspectIntegration("GitHub");
     expect(health.apiKeyConfigured).toBe(true);
     expect(health.authState).toBe("connected");
     expect(["granted", "limited"]).toContain(health.permissionState);
   }, 15_000);
 
-  it.skipIf(!hasGeminiCredential)("validates Gemini through its lightweight authenticated health endpoint", async () => {
+  it.skipIf(!runLiveProviderChecks || !hasGeminiCredential)("validates Gemini through its lightweight authenticated health endpoint", async () => {
     const health = await inspectIntegration("Gemini");
     expect(health.apiKeyConfigured).toBe(true);
     expect(health.authState).toBe("connected");
