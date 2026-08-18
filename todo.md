@@ -69,3 +69,10 @@
 - [x] Apply the user-authorized git rebase, resolve conflicts safely, and verify GitHub CI success.
 - [x] Produce downloadable source-code and terminal-verification artifacts without secrets.
 - [x] Save the rebased and verified release checkpoint.
+- [x] Audit all server/router paths, browser-visible UI routes, dependencies, runtime logs and GitHub workflow definitions.
+- [x] Fix every confirmed code or configuration defect and add focused regression coverage.
+- [x] Verify only the external integrations required by AstraFlow without enabling unrelated connectors.
+- [x] Run complete local quality gates and both GitHub workflows to a successful conclusion.
+- [x] Save the exhaustive audited release checkpoint.
+- [x] Fix the execution-log navigation route that currently renders a 404 and add a route-level regression check.
+- [x] Include client route regression tests in the standard Vitest discovery pattern.

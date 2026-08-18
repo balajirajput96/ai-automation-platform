@@ -5,6 +5,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import DashboardLayout from "./components/DashboardLayout";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { platformRoutes } from "./lib/platformRoutes";
 import {
   AgentsScreen,
   IntegrationsScreen,
@@ -24,14 +25,15 @@ function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"/"}><PlatformPage><OverviewScreen /></PlatformPage></Route>
-      <Route path={"/agents"}><PlatformPage><AgentsScreen /></PlatformPage></Route>
-      <Route path={"/workflows"}><PlatformPage><WorkflowsScreen /></PlatformPage></Route>
-      <Route path={"/projects"}><PlatformPage><ProjectsScreen /></PlatformPage></Route>
-      <Route path={"/integrations"}><PlatformPage><IntegrationsScreen /></PlatformPage></Route>
-      <Route path={"/runs"}><PlatformPage><RunsScreen /></PlatformPage></Route>
-      <Route path={"/schedules"}><PlatformPage><SchedulesScreen /></PlatformPage></Route>
-      <Route path={"/settings"}><PlatformPage><SettingsScreen /></PlatformPage></Route>
+      <Route path={platformRoutes.overview}><PlatformPage><OverviewScreen /></PlatformPage></Route>
+      <Route path={platformRoutes.agents}><PlatformPage><AgentsScreen /></PlatformPage></Route>
+      <Route path={platformRoutes.workflows}><PlatformPage><WorkflowsScreen /></PlatformPage></Route>
+      <Route path={platformRoutes.projects}><PlatformPage><ProjectsScreen /></PlatformPage></Route>
+      <Route path={platformRoutes.integrations}><PlatformPage><IntegrationsScreen /></PlatformPage></Route>
+      <Route path={platformRoutes.executionLogs}><PlatformPage><RunsScreen /></PlatformPage></Route>
+      <Route path={platformRoutes.executionLogsAlias}><PlatformPage><RunsScreen /></PlatformPage></Route>
+      <Route path={platformRoutes.schedules}><PlatformPage><SchedulesScreen /></PlatformPage></Route>
+      <Route path={platformRoutes.settings}><PlatformPage><SettingsScreen /></PlatformPage></Route>
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
