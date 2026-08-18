@@ -1,10 +1,21 @@
-import { describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { inspectIntegration } from "./integrationHealth";
 
-const hasGitHubCredential = Boolean(process.env.GITHUB_TOKEN);
+const originalGitHubToken = process.env.GITHUB_TOKEN;
+const githubHealthToken = process.env.CI ? process.env.ASTRAFLOW_LIVE_GITHUB_TOKEN : process.env.GITHUB_TOKEN;
+const hasGitHubCredential = Boolean(githubHealthToken);
 const hasGeminiCredential = Boolean(process.env.GEMINI_API_KEY);
 
 describe("configured provider credentials", () => {
+  beforeAll(() => {
+    if (githubHealthToken) process.env.GITHUB_TOKEN = githubHealthToken;
+  });
+
+  afterAll(() => {
+    if (originalGitHubToken === undefined) delete process.env.GITHUB_TOKEN;
+    else process.env.GITHUB_TOKEN = originalGitHubToken;
+  });
+
   it.skipIf(!hasGitHubCredential)("validates GitHub through its lightweight authenticated health endpoint", async () => {
     const health = await inspectIntegration("GitHub");
     expect(health.apiKeyConfigured).toBe(true);
