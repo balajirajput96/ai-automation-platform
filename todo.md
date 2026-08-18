@@ -62,10 +62,10 @@
 - [x] Save the exhaustive non-rebase verification checkpoint.
 - [x] Make project creation and linked-agent/workflow validation atomic so invalid link input cannot leave an orphan project.
 - [x] Add a focused router test proving project creation uses one transaction for project and link writes.
-- [ ] Confirm whether the user explicitly authorizes a git rebase, or wants the existing non-rebase merge workflow retained.
-- [ ] Define and implement the next prioritized platform capability after repository strategy is confirmed.
-- [ ] Audit repository rebase readiness and visible signed-in browser/service states without exposing credentials.
-- [ ] Complete any newly discovered code fixes and run the full local verification matrix.
-- [ ] Apply the user-authorized git rebase, resolve conflicts safely, and verify GitHub CI success.
-- [ ] Produce downloadable source-code and terminal-verification artifacts without secrets.
-- [ ] Save the rebased and verified release checkpoint.
+- [x] Confirm whether the user explicitly authorizes a git rebase, or wants the existing non-rebase merge workflow retained.
+- [x] Defer the next new platform capability until the user chooses a concrete product scope after rebase completion.
+- [x] Audit repository rebase readiness and visible signed-in browser/service states without exposing credentials.
+- [x] Complete any newly discovered code fixes and run the full local verification matrix.
+- [x] Apply the user-authorized git rebase, resolve conflicts safely, and verify GitHub CI success.
+- [x] Produce downloadable source-code and terminal-verification artifacts without secrets.
+- [x] Save the rebased and verified release checkpoint.
