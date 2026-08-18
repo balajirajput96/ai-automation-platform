@@ -31,7 +31,11 @@ const connected = (permissionState: "granted" | "limited" = "granted"): Integrat
 });
 
 async function checkGitHub(token: string): Promise<IntegrationHealth> {
-  const response = await fetch("https://api.github.com/user", {
+  const actionRepository = process.env.GITHUB_REPOSITORY;
+  const repositoryPath = actionRepository && /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(actionRepository)
+    ? `/repos/${actionRepository}`
+    : "/user";
+  const response = await fetch(`https://api.github.com${repositoryPath}`, {
     headers: { authorization: `Bearer ${token}`, accept: "application/vnd.github+json" },
     signal: timeoutSignal(),
   });
