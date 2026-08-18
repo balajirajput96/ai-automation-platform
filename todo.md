@@ -52,3 +52,7 @@
 - [x] Re-run the complete local verification matrix and latest GitHub CI workflow after all fixes.
 - [x] Save a final non-rebase checkpoint with the repeated audit result.
 - [x] Isolate the GitHub user-health credential in manual CI so the automatic Actions token cannot be mistaken for a valid user token.
+- [x] Audit current router, scheduler, workflow, CI and dependency paths without rebasing.
+- [x] Fix any newly confirmed failure or missing safety guard and add focused test coverage.
+- [x] Run full local verification and both GitHub Actions jobs again after all fixes.
+- [x] Save the repeated non-rebase audit release checkpoint.
