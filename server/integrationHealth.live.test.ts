@@ -5,6 +5,7 @@ const originalGitHubToken = process.env.GITHUB_TOKEN;
 const githubHealthToken = process.env.CI ? process.env.ASTRAFLOW_LIVE_GITHUB_TOKEN : process.env.GITHUB_TOKEN;
 const hasGitHubCredential = Boolean(githubHealthToken);
 const hasGeminiCredential = Boolean(process.env.GEMINI_API_KEY);
+const runLiveProviderChecks = process.env.RUN_LIVE_PROVIDER_TESTS === "true" || !process.env.CI;
 
 describe("configured provider credentials", () => {
   beforeAll(() => {
@@ -16,14 +17,14 @@ describe("configured provider credentials", () => {
     else process.env.GITHUB_TOKEN = originalGitHubToken;
   });
 
-  it.skipIf(!hasGitHubCredential)("validates GitHub through its lightweight authenticated health endpoint", async () => {
+  it.skipIf(!runLiveProviderChecks || !hasGitHubCredential)("validates GitHub through its lightweight authenticated health endpoint", async () => {
     const health = await inspectIntegration("GitHub");
     expect(health.apiKeyConfigured).toBe(true);
     expect(health.authState).toBe("connected");
     expect(["granted", "limited"]).toContain(health.permissionState);
   }, 15_000);
 
-  it.skipIf(!hasGeminiCredential)("validates Gemini through its lightweight authenticated health endpoint", async () => {
+  it.skipIf(!runLiveProviderChecks || !hasGeminiCredential)("validates Gemini through its lightweight authenticated health endpoint", async () => {
     const health = await inspectIntegration("Gemini");
     expect(health.apiKeyConfigured).toBe(true);
     expect(health.authState).toBe("connected");

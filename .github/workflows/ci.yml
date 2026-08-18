@@ -55,6 +55,7 @@ jobs:
     timeout-minutes: 5
     env:
       ASTRAFLOW_LIVE_GITHUB_TOKEN: ${{ secrets.ASTRAFLOW_LIVE_GITHUB_TOKEN }}
+      RUN_LIVE_PROVIDER_TESTS: "true"
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
     steps:
       - name: Checkout
