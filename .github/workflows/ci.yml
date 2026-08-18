@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       live_provider_validation:
-        description: "Run credentialed GitHub and Gemini health checks when repository secrets are configured"
+        description: "Run GitHub Actions-token and optional Gemini provider health checks"
         required: false
         type: boolean
         default: false
@@ -54,7 +54,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      ASTRAFLOW_LIVE_GITHUB_TOKEN: ${{ secrets.ASTRAFLOW_LIVE_GITHUB_TOKEN }}
+      # GitHub supplies this token per run. It validates the repository's
+      # authenticated GitHub integration without requiring a user PAT secret.
+      GITHUB_TOKEN: ${{ github.token }}
       RUN_LIVE_PROVIDER_TESTS: "true"
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
     steps:
