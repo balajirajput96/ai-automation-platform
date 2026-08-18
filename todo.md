@@ -47,8 +47,8 @@
 - [x] Save an audited checkpoint after the final deep-audit verification.
 - [x] Sanitize scheduled callback failure responses and add deterministic cron authorization and failure-path coverage.
 - [x] Split the oversized production client bundle into cacheable vendor chunks and verify build output remains below the warning threshold.
-- [ ] Re-audit all executable router, scheduler, and workflow paths plus both GitHub Actions jobs without rebasing.
-- [ ] Add or correct deterministic coverage for any newly found unguarded failure path.
-- [ ] Re-run the complete local verification matrix and latest GitHub CI workflow after all fixes.
-- [ ] Save a final non-rebase checkpoint with the repeated audit result.
-- [ ] Isolate the GitHub user-health credential in manual CI so the automatic Actions token cannot be mistaken for a valid user token.
+- [x] Re-audit all executable router, scheduler, and workflow paths plus both GitHub Actions jobs without rebasing.
+- [x] Add or correct deterministic coverage for any newly found unguarded failure path.
+- [x] Re-run the complete local verification matrix and latest GitHub CI workflow after all fixes.
+- [x] Save a final non-rebase checkpoint with the repeated audit result.
+- [x] Isolate the GitHub user-health credential in manual CI so the automatic Actions token cannot be mistaken for a valid user token.
