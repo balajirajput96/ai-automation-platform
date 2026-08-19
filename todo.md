@@ -89,3 +89,5 @@
 - [x] Backfill or lazily initialize callback tokens for scheduled jobs created before the retry-safety migration, with legacy-row regression coverage.
 - [x] Verify the authorized path for rotating user-owned Heartbeat callback payloads after a scheduled execution, then add focused coverage.
 - [ ] Run the user-deferred authenticated production scheduled-job callback verification before enabling any real recurring workflow.
+- [x] Re-audit all implemented repository scripts, CI workflows, connector routes, provider adapters and runtime logs for new reachable failures without activating unrelated external services.
+- [ ] Verify the final remote Git state, latest GitHub Actions runs, production browser route behavior and the complete local validation matrix after the reliability release.
