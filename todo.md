@@ -79,8 +79,8 @@
 - [x] Re-audit the latest remote and local history, current GitHub Actions runs, and fresh runtime logs after the final route-verification release.
 - [x] Safely rebase current AstraFlow work onto the latest GitHub main history, resolving only confirmed conflicts without dropping verified fixes.
 - [x] Fix any newly confirmed code, runtime, dependency, or CI issue and add focused regression coverage.
-- [ ] Repeat type check, full Vitest suite, production build, production dependency audit, and both relevant GitHub Actions runs on the final rebased commit.
-- [ ] Save the final rebased-and-verified AstraFlow release checkpoint.
+- [x] Repeat type check, full Vitest suite, production build, production dependency audit, and repeated successful GitHub Actions runs on the final rebased commit (verified 2026-08-19; runs `32242718846` and `32240311553`).
+- [x] Save the final rebased-and-verified AstraFlow release checkpoint in `REBASE_VERIFICATION.md`.
 - [ ] Recover access to the user-authorized GitHub session only through an already signed-in relevant browser profile, then complete queued CI monitoring and reruns.
 - [x] Re-audit all currently unresolved GitHub workflow states and repository merge/rebase readiness after the latest commit.
 - [x] Confirm that the existing Scheduled Jobs feature uses only deployed, authenticated, idempotent callback handling and does not create unrequested recurring external actions.
