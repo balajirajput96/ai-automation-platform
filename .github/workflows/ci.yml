@@ -28,6 +28,7 @@ jobs:
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
         with:
+          version: 10.15.1
           run_install: false
 
       - name: Set up Node.js
@@ -54,9 +55,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      # GitHub supplies this token per run. It validates the repository's
-      # authenticated GitHub integration without requiring a user PAT secret.
-      GITHUB_TOKEN: ${{ github.token }}
+      # The live test reads this CI-specific variable before mapping it to GITHUB_TOKEN.
+      ASTRAFLOW_LIVE_GITHUB_TOKEN: ${{ github.token }}
       RUN_LIVE_PROVIDER_TESTS: "true"
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
     steps:
@@ -66,6 +66,7 @@ jobs:
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
         with:
+          version: 10.15.1
           run_install: false
 
       - name: Set up Node.js
