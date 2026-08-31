@@ -1,12 +1,15 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { inspectIntegration } from "./integrationHealth";
+import { inspectIntegration, isSandboxProxy } from "./integrationHealth";
 
 const originalGitHubToken = process.env.GITHUB_TOKEN;
 const originalGitHubRepository = process.env.GITHUB_REPOSITORY;
+const originalSandboxProxy = process.env.SANDBOX_PROXY_GITHUB_PROXY;
 
 describe("inspectIntegration", () => {
   beforeEach(() => {
     vi.stubGlobal("fetch", vi.fn());
+    // Clear sandbox proxy env var for tests
+    delete process.env.SANDBOX_PROXY_GITHUB_PROXY;
   });
 
   afterEach(() => {
@@ -15,6 +18,8 @@ describe("inspectIntegration", () => {
     else process.env.GITHUB_TOKEN = originalGitHubToken;
     if (originalGitHubRepository === undefined) delete process.env.GITHUB_REPOSITORY;
     else process.env.GITHUB_REPOSITORY = originalGitHubRepository;
+    if (originalSandboxProxy === undefined) delete process.env.SANDBOX_PROXY_GITHUB_PROXY;
+    else process.env.SANDBOX_PROXY_GITHUB_PROXY = originalSandboxProxy;
   });
 
   it("uses the current repository endpoint for a GitHub Actions token", async () => {
